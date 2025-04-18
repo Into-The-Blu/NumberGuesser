@@ -1,5 +1,10 @@
 Project URL: https://roadmap.sh/projects/number-guessing-game
 
+Requires: Python 3.6+ installed
+
+Program is a standalone .py file. Store wherever you want it to live
+
+
 Thank you for taking the time to play this!
 
 This is my roadmap.sh Number Guesser project entry - it (should) meet the following requirements:
