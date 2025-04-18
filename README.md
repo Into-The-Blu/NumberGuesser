@@ -1,4 +1,4 @@
-Repository URL: https://github.com/Into-The-Blu/NumberGuesser 
+Project URL: https://roadmap.sh/projects/number-guessing-game
 
 Thank you for taking the time to play this!
 
