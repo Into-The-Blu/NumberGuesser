@@ -1,3 +1,5 @@
+Repository URL: https://github.com/Into-The-Blu/NumberGuesser 
+
 Thank you for taking the time to play this!
 
 This is my roadmap.sh Number Guesser project entry - it (should) meet the following requirements:
