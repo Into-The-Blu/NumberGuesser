@@ -1,6 +1,6 @@
 Project URL: https://roadmap.sh/projects/number-guessing-game
 
-Requires: Python 3.6+ installed
+Requires: Python 3.6+ installed, a POSIX compliant terminal
 
 Program is a standalone .py file. Store wherever you want it to live
 
