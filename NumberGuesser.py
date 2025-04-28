@@ -1,9 +1,13 @@
+#Number Guessing Game v1.0
+#by Into-The-Blu (https://github.com/Into-The-Blu) for a roadmap.sh project
+#free use license but I doubt anyone will
+
 import random
 import sys
 #import json 
 #import os
 
-scoreboard = []
+scoreboard = [] #temporary
 
 #requests user input to decide the difficulty. 
 #each case returns a number of chances, and assigns a score multiplier to the diff variable
