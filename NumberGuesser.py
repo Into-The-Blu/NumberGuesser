@@ -1,21 +1,26 @@
-#Number Guessing Game v1.0
+#Number Guessing Game v1.1
 #by Into-The-Blu (https://github.com/Into-The-Blu) for a roadmap.sh project
 #free use license but I doubt anyone will
 
 import random
 import sys
-#import json 
-#import os
+import os
+import json
 
-scoreboard = [] #temporary
+try:
+   with open(f"{os.path.dirname(os.path.realpath(__file__))}/leaderboard.json", "r") as f:
+       scoreboard = json.loads(f.read())
+except FileNotFoundError:
+    with open(f"{os.path.dirname(os.path.realpath(__file__))}/leaderboard.json", "x") as f:
+        scoreboard = []
 
 #requests user input to decide the difficulty. 
 #each case returns a number of chances, and assigns a score multiplier to the diff variable
 def getDiff():
-    print(f"\nWhat difficulty would you like to play on?\n1. Easy (10 guesses)\n2. Medium (5 guesses)\n3. Hard (3 guesses)")
+    print("\nWhat difficulty would you like to play on?\n1. Easy (10 guesses)\n2. Medium (5 guesses)\n3. Hard (3 guesses)")
     global diff
     while True:
-        match str(input(f"\nInput:").lower()):
+        match str(input("\nInput:").lower()):
             case "easy"|"1":
                 diff = 1.0
                 return 10
@@ -34,9 +39,9 @@ def getDiff():
 def guesrBody():
     chances = getDiff() #outputs no. of chances based on user difficulty input
     number = random.randint(1,100)
-    print(f"\nAlright! Make your first guess.\n")
+    print("\nAlright! Make your first guess.\n")
     for i in range(chances):
-        x = int(input(f"\nInput:").strip())
+        x = int(input("\nInput:").strip())
         if x == number: #checks for a win condition
             global score
             score = ((chances-(i+1))/chances)*100*diff #(chances left/total chances)*100*difficulty multiplier
@@ -60,21 +65,21 @@ def guesrBody():
                 print(f"Too low! You have {chances-(i+1)} attempts left.\n")
             else:
                 print(f"Too low! You only have {chances-(i+1)} attempt left!\n")
-    if gameFinished == True:
+    if gameFinished:
         pass
     else: 
-        print(f"Uh oh! You've run out of attempts.")
+        print("Uh oh! You've run out of attempts.")
         menu()
 
 #gives the user 3 options: new game, scoreboard, and exit. responds to user input
 def menu():
-    print(f"\nWhat would you like to do?\n\nMenu:\n1. New Game\n2. View Scoreboard\n3. Exit")
+    print("\nWhat would you like to do?\n\nMenu:\n1. New Game\n2. View Scoreboard\n3. Exit")
     while True:
-        match str(input(f"\nInput:")):
+        match str(input("\nInput:")):
             case "1": #starts the game
                 guesrBody()
             case "2": #displays scoreboard
-                print(f"\nScoreboard:\n-----------")
+                print("\nScoreboard:\n-----------")
                 for i in range(len(scoreboard)):
                     print(f"{i + 1}.  {scoreboard[i]}")
                 if len(scoreboard) == 9:
@@ -83,7 +88,9 @@ def menu():
                 break
             case "3": #exits game
                 print("Thank you for playing! Enter any input to exit.")
-                if input() == True:
+                with open(f"{os.path.dirname(os.path.realpath(__file__))}/leaderboard.json", "w") as f:
+                    f.write(scoreboard)
+                if input():
                     sys.exit()
             case _:
                 print("I didn't recognise that input, could you retype?")
@@ -96,8 +103,11 @@ def scoreboardCalc():
     scoreboard.sort(reverse = True)
     if len(scoreboard) >= 11:
         del scoreboard[10]
+    with open(f"{os.path.dirname(os.path.realpath(__file__))}/leaderboard.json", "w") as f:
+        x = json.dumps(scoreboard)
+        f.write(x)
 
 #program push-off point
-print(f"Welcome to my Number Guessing Game!\nI will think of a number between 1 and 100, and you have a set amount of chances to guess it.")
+print("Welcome to my Number Guessing Game!\nI will think of a number between 1 and 100, and you have a set amount of chances to guess it.")
 menu()
 
